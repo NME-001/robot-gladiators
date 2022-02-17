@@ -29,7 +29,7 @@ var fight = function(enemyName) {
     }
 
     // remove enemy's health by subtracting the amount set in the playerAttack variable
-    enemyHealth = enemyHealth - playerAttack;
+    enemyHealth = Math.max(0, enemyHealth - playerAttack);
     console.log(
       playerName + ' attacked ' + enemyName + '. ' + enemyName + ' now has ' + enemyHealth + ' health remaining.'
     );
@@ -48,7 +48,7 @@ var fight = function(enemyName) {
     }
 
     // remove players's health by subtracting the amount set in the enemyAttack variable
-    playerHealth = playerHealth - enemyAttack;
+    playerHealth = Math.max(0 , playerHealth - enemyAttack);
     console.log(
       enemyName + ' attacked ' + playerName + '. ' + playerName + ' now has ' + playerHealth + ' health remaining.'
     );
@@ -61,6 +61,9 @@ var fight = function(enemyName) {
     } else {
       window.alert(playerName + ' still has ' + playerHealth + ' health left.');
     }
+
+    playerMoney = Math.max(0, playerMoney - 10);
+
   }
 };
 
@@ -76,9 +79,7 @@ var startGame = function() {
 
       var pickedEnemyName = enemyNames[i];
 
-      enemyHealth = 50;
-
-      fight(pickedEnemyName);
+      enemyHealth = randomNumber();
 
       //if we're not at the last enemy in the array
       if (playerHealth > 0 && i < enemyNames.length - 1) {
@@ -169,6 +170,12 @@ var shop = function() {
       shop();
       break;
   }
+};
+
+var randomNumber = function() {
+  var value = Math.floor(math.random() * 21) + 40;
+    
+  return value;
 };
 
 startGame();
